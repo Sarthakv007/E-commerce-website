@@ -1,0 +1,146 @@
+body {
+    padding: 10px;
+}
+.hero-section {
+    background-attachment: fixed; /* Parallax effect */
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+/* General Container */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+/* Alerts Styling */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Listing Details Section */
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+img {
+    border-radius: 10px;
+    margin-bottom: 15px;
+    max-width: 100%;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #4d4d4d;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    color: #2c3e50;
+}
+
+/* Form Styling */
+form {
+    margin: 20px 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+input:focus, select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1f78b4;
+}
+
+/* Comments Section */
+.list-group-item {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95rem;
+    color: #4d4d4d;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.list-group-item:hover {
+    background-color: #f0f0f0;
+}
+
+.text-center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

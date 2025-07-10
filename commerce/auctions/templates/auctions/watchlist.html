@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 style="font-family:'Impact'; font-color:'#B0E0E6';">WATCHLIST</h2>
+    <div class="row mx-3">
+        {% for list in Listing %}
+            <div class="card mx-3" style="width:18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">{{ list.brand }} {{ list.title }} </h5>
+                </div>
+                <image class="card-img-top" src="{{ list.image_url }}" alt="{{ list.title }}">
+                <div class="card-body">
+                    <p class="card-text"> {{ list.discription|slice:":100" }}... </p>
+                </div>
+                <div class="card-footer">
+                    <h5>Currunt Bid : ₹{{ list.price }}</h5>
+                    <a href="{% url 'listing' id=list.id %}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

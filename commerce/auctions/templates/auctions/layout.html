@@ -1,0 +1,623 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+    </head>
+    <style>
+        /* General Styling for the Navigation */
+        .nav {
+            list-style-type: none;
+            display: flex;
+            justify-content: left; /* Center the items */
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* White background */
+            font-family: 'Arial', sans-serif; /* Clean sans-serif font */
+            letter-spacing: 1px; /* Slight spacing between items */
+            border-bottom: 1px solid #ccc; /* Light grey border at the bottom */
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 0 20px; /* Spacing between items */
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333; /* Dark grey color for the text */
+            font-size: 1.2rem; /* Font size for better readability */
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px 15px; /* Padding for clickable area */
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+
+        /* Hover Effect for Links */
+        .nav-link:hover {
+            color: #3498db; /* Change text color on hover to blue */
+        }
+
+        /* Light Blue Bar Appears Below Nav Item on Hover */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #3498db; /* Light blue bar */
+            transition: width 0.3s ease; /* Smooth transition */
+        }
+
+        .nav-item:hover::after {
+            width: 100%; /* Extend the bar on hover */
+        }
+
+        /* Active Link Styling */
+        .nav-item a.active {
+            color: #3498db; /* Active link color */
+            font-weight: bold;
+        }
+
+        /* Responsive Design for Smaller Screens */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column; /* Stack items vertically */
+                align-items: center; /* Center the items */
+            }
+
+            .nav-item {
+                margin: 10px 0; /* Vertical spacing between items */
+            }
+
+            .nav-link {
+                font-size: 1.3rem; /* Larger text for mobile */
+            }
+        }
+        background-color: #f9f9f9;
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 20px auto;
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        flex-direction: row; /* Align items in a row */
+        justify-content: space-between; /* Space between items */
+        align-items: center; /* Align vertically */
+    }
+
+    /* Label Styling */
+    label {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #333;
+        margin-right: 15px; /* Add some space between label and input */
+    }
+
+    /* Select Dropdown Styling */
+    select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        font-size: 1rem;
+        width: 150px; /* Narrow width for the select dropdown */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    select:hover {
+        border-color: #00aaff; /* Light blue on hover */
+        box-shadow: 0 0 5px rgba(0, 170, 255, 0.5); /* Light blue shadow */
+    }
+
+    /* Button Styling */
+    button {
+        padding: 12px 20px;
+        background-color: #ff7f50; /* Light coral color */
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #ff6347; /* Darker coral color */
+        transform: translateY(-2px);
+    }
+
+    /* Light blue hover effect for the button */
+    button:hover {
+        background-color: #00aaff; /* Light blue on hover */
+    }
+
+    /* Responsive Design for Small Screens */
+    @media (max-width: 600px) {
+        form {
+            flex-direction: column; /* Stack elements vertically on smaller screens */
+            align-items: stretch;
+        }
+
+        select, button {
+            width: 100%; /* Make inputs and button full-width on small screens */
+            margin-bottom: 10px;
+        }
+
+        label {
+            margin-right: 0; /* Remove margin on smaller screens */
+            margin-bottom: 5px;
+        }
+    }
+    form {
+        background-color: #f9f9f9;
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 20px auto;
+        font-family: 'Ariel', sans-serif;
+        display: flex;
+        flex-direction: row; /* Align items in a row */
+        justify-content: space-between; /* Space between items */
+        align-items: left; /* Align vertically */
+    }
+
+    /* Label Styling */
+    label {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #333;
+        margin-right: 15px; /* Add some space between label and input */
+    }
+
+    /* Select Dropdown Styling */
+    select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        font-size: 1rem;
+        width: 150px; /* Narrow width for the select dropdown */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    select:hover {
+        border-color: #00aaff; /* Light blue on hover */
+        box-shadow: 0 0 5px rgba(0, 170, 255, 0.5); /* Light blue shadow */
+    }
+
+    /* Button Styling */
+    button {
+        padding: 12px 20px;
+        background-color: #ff7f50; /* Light coral color */
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+        transition: background-color 0.5s ease, transform 0.5s ease;
+    }
+
+    button:hover {
+        background-color: #ff6347; /* Darker coral color */
+        transform: translateY(-2px);
+    }
+
+    /* Light blue hover effect for the button */
+    button:hover {
+        background-color: #00aaff; /* Light blue on hover */
+    }
+
+    /* Responsive Design for Small Screens */
+    @media (max-width: 600px) {
+        form {
+            flex-direction: column; /* Stack elements vertically on smaller screens */
+            align-items: stretch;
+        }
+
+        select, button {
+            width: 100%; /* Make inputs and button full-width on small screens */
+            margin-bottom: 10px;
+        }
+
+        label {
+            margin-right: 0; /* Remove margin on smaller screens */
+            margin-bottom: 5px;
+        }
+    }
+    .modern-button {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 8px;
+        background-color: #00aaff; /* Light Blue */
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        outline: none;
+    }
+
+    /* Hover effect */
+    .modern-button:hover {
+        background-color: #007bb5; /* Darker blue */
+        transform: translateY(-4px); /* Slight lift effect */
+        box-shadow: 0 4px 8px rgba(0, 170, 255, 0.4); /* Light blue shadow */
+    }
+
+    /* Active state for button (when clicked) */
+    .modern-button:active {
+        transform: translateY(0); /* Button returns to original position */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow when clicked */
+    }
+
+    /* Disabled button */
+    .modern-button:disabled {
+        background-color: #b0c9d8; /* Disabled state with a muted color */
+        color: #6c7a88;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+    /* card */
+    /* General Card Styling */
+    .card {
+        margin: 10px;
+        width: 18rem;
+        background-color: #f9f9f9; /* Light background for a clean look */
+        color: #333; /* Neutral text color */
+        border-radius: 12px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden; /* Ensures content fits nicely */
+    }
+
+    /* Hover effect for the entire card */
+    .card:hover {
+        transform: translateY(-5px); /* Slight lift on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    }
+
+    /* Card Header */
+    .card-header {
+        background-color: #4a90e2; /* Light blue header */
+        color: #fff; /* White text for contrast */
+        padding: 15px;
+        font-size: 1.2rem;
+        font-family: 'Montserrat', sans-serif;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    /* Card Title */
+    .card-title {
+        font-family: 'Roboto Condensed', sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        color: #fff; /* White color for header text */
+    }
+
+    /* Card Image */
+    .card-img-top {
+        width: 100%;
+        height: 180px; /* Fixed height for uniformity */
+        object-fit: cover; /* Ensures image fills the space without distortion */
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Card Body */
+    .card-body {
+        padding: 15px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.9rem;
+        color: #555; /* Dark grey text for readability */
+        line-height: 1.6;
+    }
+
+    .card-text {
+        color: #666; /* Slightly lighter grey */
+    }
+
+    /* Card Footer */
+    .card-footer {
+        background-color: #f1f1f1; /* Slightly grey background */
+        padding: 10px 15px;
+        text-align: center;
+        border-top: 1px solid #ddd;
+    }
+
+    .card-footer h5 {
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+        color: #333;
+        font-size: 1.1rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        display: inline-block;
+        background-color: #007bff; /* Standard blue */
+        color: #fff;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-family: 'Roboto', sans-serif;
+        border: none;
+        border-radius: 25px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue */
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+    .btn-primary:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    /* General Form Styling */
+    /* General Form Styling */
+    form {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: 'Roboto', sans-serif;
+        display: flex; /* Flexbox for column layout */
+        flex-direction: column; /* Stack items vertically */
+        gap: 20px; /* Add space between form groups */
+    }
+
+    /* Labels */
+    label {
+        font-weight: 500;
+        color: #2c3e50;
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    /* Input Fields */
+    .form-control, select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus, select:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+        outline: none;
+    }
+
+    /* Submit Button */
+    input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+        background-color: #4a90e2;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #357ABD;
+        transform: scale(1.02);
+    }
+
+    input[type="submit"]:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    }
+
+    /* Form Group Styling */
+    .form-group {
+        display: flex;
+        flex-direction: column; /* Ensures label and input are stacked */
+    }
+
+    /* Dropdown Styling */
+    select {
+        cursor: pointer;
+        background: #fff;
+    }
+    /* General Container */
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+    }
+
+    /* Alerts Styling */
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* Listing Details Section */
+    h2 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 2rem;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    img {
+        border-radius: 10px;
+        margin-bottom: 15px;
+        max-width: 100%;
+    }
+
+    p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+        color: #4d4d4d;
+        margin-bottom: 10px;
+    }
+
+    h4 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.25rem;
+        color: #2c3e50;
+    }
+
+    /* Form Styling */
+    form {
+        margin: 20px 0;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #333333;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, select {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+        width: 100%;
+        padding: 8px 10px;
+        margin-bottom: 10px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+    }
+
+    input:focus, select:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+
+    button {
+        background-color: #3498db;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #1f78b4;
+    }
+
+    /* Comments Section */
+    .list-group-item {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.95rem;
+        color: #4d4d4d;
+        background-color: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+
+    .list-group-item:hover {
+        background-color: #f0f0f0;
+    }
+
+    .text-center {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+    .styled-image {
+        border-radius: 10px;
+        width: 400px;
+        display: block;
+        margin: auto;
+    </style>
+
+
+    <body>
+        <div>
+            <img src="{% static 'auctions/logo.jpeg' %}" alt="A styled image" class="styled-image">
+        <div style="font-family:'Impact'">
+            {% if user.is_authenticated %}
+                Signed in as : {{ user.username }}.
+            {% else %}
+                Not signed in.
+            {% endif %}
+        </div>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create' %}">Create Listings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+        </div>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>
